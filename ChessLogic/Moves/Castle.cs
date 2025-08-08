@@ -32,7 +32,7 @@ public class Castle : Move
     public override bool Execute(Board board)
     {
         new NormalMove(FromPos, ToPos).Execute(board);
-        new NormalMove(rookToPos, rookToPos).Execute(board);
+        new NormalMove(rookFromPos, rookToPos).Execute(board);  // Fixed: using correct positions
 
         return false;
     }
@@ -41,7 +41,7 @@ public class Castle : Move
     {
         Player player = board[FromPos].Color;
 
-        if (board.IsInCheck(player)) 
+        if (board.IsInCheck(player))
         {
             return false;
         }
@@ -54,7 +54,7 @@ public class Castle : Move
             new NormalMove(kingPosInCopy, kingPosInCopy + kingMoveDir).Execute(copy);
             kingPosInCopy += kingMoveDir;
 
-            if (copy.IsInCheck(player)) 
+            if (copy.IsInCheck(player))
             {
                 return false;
             }
